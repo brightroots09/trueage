@@ -1,0 +1,28 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-6 offset-md-3">
+      <nb-card accent="success">
+          <nb-card-header>
+            Admin Profile
+          </nb-card-header>
+          <nb-card-body>
+            <p>
+                <b>Email:</b> {{ adminModel.data[0].email }}
+            </p>
+        
+            <p>
+                <b>Verified:</b> <span *ngIf="!adminModel.details.verified; else verified" class="text-danger p-4" >No</span>
+                <ng-template #verified>
+                  <span class="text-success p-4">Yes</span>
+                </ng-template>
+            </p>
+        
+            <p>
+              <b>Status:</b> <span *ngIf="!adminModel.details.disabled; else inactive" class="text-success p-4">Active</span>
+              <ng-template #inactive>
+                <span class="text-danger p-4">Inactive</span>
+              </ng-template>
+            </p>
+          </nb-card-body>
+        </nb-card>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<nb-layout>
+  <nb-layout-header fixed *ngIf="_authService.loggedIn()">
+    <a href="#" class="text-primary" (click)="toggle()">
+      <i class="fas fa-bars"></i>
+    </a>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-6">
+              <a *ngIf="_authService.loggedIn()" routerLink="/profile" routerLinkActive="active">Profile</a>
+            </div>
+            <div class="col-md-6 text-right">
+              <a class="text-danger" *ngIf="_authService.loggedIn()" style="cursor: pointer;" (click)="_authService.logoutUser()">Logout</a>
+            </div>
+      </div>
+    </div>
+  </nb-layout-header>
+  <nb-sidebar *ngIf="_authService.loggedIn()">
+    <nb-menu [items]="items" size="small"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column class="main-content">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

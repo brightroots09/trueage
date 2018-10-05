@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card accent="success">
+      <nb-card-header class="text-center">
+        <img src="/images/logo.png" class="rounded mx-auto d-block" alt="">
+        Admin Login
+      </nb-card-header>
+      <nb-card-body>
+          <form #userForm="ngForm" (ngSubmit)="onFormSubmit()">
+              <div class="alert alert-danger alert-dismissible fade show" *ngIf="message" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" id="email" #email="ngModel" class="form-control" name="email" [class.is-invalid]="email.invalid && email.touched"
+                  [class.is-valid]="email.valid && email.touched" [(ngModel)]="adminModel.email" required>
+                <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
+              </div>
+        
+              <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" class="form-control" #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                  [class.is-valid]="password.valid && password.touched" [(ngModel)]="adminModel.password" required>
+                <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password Required</small>
+              </div>
+              <button class="btn btn-outline-primary" [disabled]="userForm.form.invalid" (click)="tryLogin()"  type="button">Login</button>
+            </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

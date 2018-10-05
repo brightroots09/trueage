@@ -1,0 +1,54 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-12">
+    <nb-card accent="info">
+      <nb-card-header>
+        List of coupons
+      </nb-card-header>
+      <nb-card-body>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Vote Credits</th>
+                <th>User Limit</th>
+                <th>Used By</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="couponsModel.length > 0; else coupons_else">
+              <tr *ngFor="let coupons of couponsModel">
+                <td>
+                  {{ coupons.key }}
+                </td>
+                <td>
+                  {{ coupons.data.vote_credits }}
+                </td>
+                <td>
+                  {{ coupons.data.user_limit }}
+                </td>
+                <td>
+                  {{ coupons.data.used_by }}
+                </td>
+                <td>
+                  <a routerLink="/coupon_detials/{{ coupons.key }}" class="text-info">View</a>
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #coupons_else>
+              <tbody>
+                <tr>
+                  <td colspan="4" class="text-center">
+                    No Coupons Added
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+
+          </table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

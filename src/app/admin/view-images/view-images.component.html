@@ -1,0 +1,83 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-12">
+    <nb-card accent="info">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-md-6">List of images</div>
+          <div class="col-md-6 text-right"> Total Images: {{ imagesModel.length }} </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Current collected votes</th>
+                <th>Image Url</th>
+                <th>Total collected votes</th>
+                <th>Votes to be collected</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="imagesModel.length > 0; else coupons_else">
+              <tr *ngFor="let image of imagesModel">
+                <td>
+                  {{ image.childData[image.childKey[0]].current_collected_votes }}
+                </td>
+                <td>
+                  <img src="{{ image.childData[image.childKey[0]].image_url }}" class="h-25 ml-auto mr-auto" alt="">
+                </td>
+                <td>
+                  {{ image.childData[image.childKey[0]].total_collected_votes }}
+                </td>
+                <td>
+                  {{ image.childData[image.childKey[0]].votes_to_be_collected }}
+                </td>
+                <td>
+                  <!-- <a class="text-info" routerLink="">View</a> -->
+                  <a type="button" class="btn btn-outline-primary" data-toggle="modal" attr.data-target="#exampleModal+{{image.key}}">Delete</a>
+
+                  <div class="modal fade" id="exampleModal+{{image.key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Reason</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form (ngSubmit)="onFormSubmit(image.childKey[0], image, image.childData[image.childKey[0]].image_url)" class="mb-3">
+                            <div class="form-group">
+                              <label>Type reason to delete the picture</label>
+                              <textarea #reason="ngModel" class="form-control" name="reason" [(ngModel)]="imageReason.reason" [class.is-invalid]="reason.invalid && reason.touched"
+                                [class.is-valid]="reason.valid && reason.touched" placeholder="Enter tour text here..." required></textarea>
+                              <small class="text-danger" [class.d-none]="reason.valid || reason.untouched">Reason is required</small>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary mr-2">Send</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #coupons_else>
+              <tbody>
+                <tr>
+                  <td colspan="4" class="text-center">
+                    No images in voting list
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+
+          </table>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
