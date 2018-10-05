@@ -173,16 +173,17 @@ router.post("/delete_image", verifyToken, function (req, res, callback) {
     let images = db.ref(`voting_list`)
     
     let user_id = req.body.id.key;
-    let image_id = req.body.id.childKey[0]
+    let image_id;
     let reason = req.body.reason.reason;
     let image_url = req.body.url
     
-    let user_profile_photo = db.ref(`user_profile_photos`).child(user_id).child(image_id)
+    let user_profile_photo = db.ref(`user_profile_photos`).child(user_id)
     let notification = db.ref(`notification_list`).child(user_id)
 
     images.orderByChild('user_id').equalTo(user_id)
         .once('value').then(function (snapshot) {
             console.log(snapshot.val())
+            // image_id = snapshot.val().image_id
             snapshot.forEach(function (childSnapshot) {
                 //remove each child
                 images.child(childSnapshot.key).remove();
@@ -195,12 +196,12 @@ router.post("/delete_image", verifyToken, function (req, res, callback) {
         type: "delete_image_done"
     })
 
-    user_profile_photo.once('value', function(snapshot){
+    user_profile_photo.child(image_id).once('value', function(snapshot){
         user_profile_photo.set({
-            current_collected_votes: 0,
+            current_collected_votes: "0",
             image_url: snapshot.val().image_url,
             total_collected_votes: snapshot.val().total_collected_votes,
-            votes_to_be_collected: 0
+            votes_to_be_collected: "0"
         })
     })
 
