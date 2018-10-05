@@ -47,7 +47,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form (ngSubmit)="onFormSubmit(image.childKey[0], image, image.childData[image.childKey[0]].image_url)" class="mb-3">
+                          <form (ngSubmit)="onFormSubmit(image)" class="mb-3">
                             <div class="form-group">
                               <label>Type reason to delete the picture</label>
                               <textarea #reason="ngModel" class="form-control" name="reason" [(ngModel)]="imageReason.reason" [class.is-invalid]="reason.invalid && reason.touched"

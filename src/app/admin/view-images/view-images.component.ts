@@ -32,8 +32,8 @@ export class ViewImagesComponent implements OnInit {
   }
 
 
-  onFormSubmit(id, image, url){
-    this.admin.deleteImage(id, image, url, this.imageReason)
+  onFormSubmit(id, url){
+    this.admin.deleteImage(id, url, this.imageReason)
       .subscribe(res => {
         window.location.reload()
       }, error => console.error(error))

@@ -61,8 +61,8 @@ export class AdminService {
     return this.http.get<any>(this._viewImages)
   }
 
-  deleteImage(id, image, url, reason): Observable<any>{
-    return this.http.post<any>(this._deleteImage, {id, image, url, reason})
+  deleteImage(id, url, reason): Observable<any>{
+    return this.http.post<any>(this._deleteImage, {id, url, reason})
   }
 
 }
