@@ -22,16 +22,16 @@
             <tbody *ngIf="imagesModel.length > 0; else coupons_else">
               <tr *ngFor="let image of imagesModel">
                 <td>
-                  {{ image.childData[image.childKey[0]].current_collected_votes }}
+                  {{ image.childData.current_collected_votes }}
                 </td>
                 <td>
-                  <img src="{{ image.childData[image.childKey[0]].image_url }}" class="h-25 ml-auto mr-auto" alt="">
+                  <img src="{{ image.childData.image_url }}" class="h-25 ml-auto mr-auto" alt="">
                 </td>
                 <td>
-                  {{ image.childData[image.childKey[0]].total_collected_votes }}
+                  {{ image.childData.total_collected_votes }}
                 </td>
                 <td>
-                  {{ image.childData[image.childKey[0]].votes_to_be_collected }}
+                  {{ image.childData.votes_to_be_collected }}
                 </td>
                 <td>
                   <!-- <a class="text-info" routerLink="">View</a> -->
@@ -47,7 +47,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form (ngSubmit)="onFormSubmit(image)" class="mb-3">
+                          <form (ngSubmit)="onFormSubmit(image.key, image.childData.image_url)" class="mb-3">
                             <div class="form-group">
                               <label>Type reason to delete the picture</label>
                               <textarea #reason="ngModel" class="form-control" name="reason" [(ngModel)]="imageReason.reason" [class.is-invalid]="reason.invalid && reason.touched"

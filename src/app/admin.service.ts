@@ -19,14 +19,18 @@ export class AdminService {
    * ----
    */
 
-  private _adminProfileUrl = "/admin/profile";
-  private _createCouponUrl = "/admin/create_coupon";
-  private _viewCouponsUrl = "/admin/view_coupons";
-  private _viewCouponsDetailsUrl = "/admin/coupon_detials";
-  private _editCouponUrl = "/admin/edit_coupon";
+  private _adminProfileUrl = "http://localhost:8080/admin/profile";
+  private _createCouponUrl = "http://localhost:8080/admin/create_coupon";
+  private _viewCouponsUrl = "http://localhost:8080/admin/view_coupons";
+  private _viewCouponsDetailsUrl = "http://localhost:8080/admin/coupon_detials";
+  private _editCouponUrl = "http://localhost:8080/admin/edit_coupon";
 
-  private _viewImages = "/admin/view_images";
-  private _deleteImage = "/admin/delete_image";
+  private _viewImages = "http://localhost:8080/admin/view_images";
+  private _deleteImage = "http://localhost:8080/admin/delete_image";
+
+  private _reportedImageUrl = "http://localhost:8080/admin/reports";
+  private _deleteReportedImageUrl = "http://localhost:8080/admin/delete_reported_image";
+  private _addToVotingListUrl = "http://localhost:8080/admin/add_to_voting_list";
 
   constructor(private http: HttpClient) { }
 
@@ -63,6 +67,18 @@ export class AdminService {
 
   deleteImage(id, url, reason): Observable<any>{
     return this.http.post<any>(this._deleteImage, {id, url, reason})
+  }
+
+  reportedImage(): Observable<any>{
+    return this.http.get<any>(this._reportedImageUrl)
+  }
+
+  deleteReportedImage(images): Observable<any>{
+    return this.http.post<any>(this._deleteReportedImageUrl, images)
+  }
+
+  addToVotingList(images): Observable<any>{
+    return this.http.post<any>(this._addToVotingListUrl, images)
   }
 
 }

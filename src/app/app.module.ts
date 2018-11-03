@@ -23,6 +23,7 @@ import { CreateCouponComponent } from './admin/create-coupon/create-coupon.compo
 import { ViewCouponsComponent } from './admin/view-coupons/view-coupons.component';
 import { CouponDetailsComponent } from './admin/coupon-details/coupon-details.component';
 import { ViewImagesComponent } from './admin/view-images/view-images.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ViewImagesComponent } from './admin/view-images/view-images.component';
     CreateCouponComponent,
     ViewCouponsComponent,
     CouponDetailsComponent,
-    ViewImagesComponent
+    ViewImagesComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

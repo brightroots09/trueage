@@ -1,0 +1,21 @@
+(function renew(){
+    let users = db.ref("registered-users");
+
+    users.once('value', function(snapshot){
+        snapshot.forEach(childSnapshot => {
+            schedule.scheduleJob(`*/5 * * * * *`, function(){
+                console.log(childSnapshot.key, 'hey');
+            });
+        })
+    })
+
+})()
+
+// var date = new Date()
+
+// var day = date.getDay()
+// var month = date.getMonth()
+
+// schedule.scheduleJob(`*/${seconds} * * * * *`, function(){
+//     console.log('This runs at 3:10AM every Friday, Saturday and Sunday.');
+// });

@@ -25,6 +25,11 @@ export class AppComponent {
       title: "View Images",
       icon: "far fa-image",
       link: "/view_images"
+    },
+    {
+      title: "Reports",
+      icon: "fas fa-ban",
+      link: "/reports"
     }
    ];
    constructor(private _authService: AuthService, private sidebarService: NbSidebarService ){}

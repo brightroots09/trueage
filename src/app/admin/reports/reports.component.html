@@ -1,0 +1,25 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <ng-container *ngIf="imagesModel.length > 0; else imagesModel_else">
+    <div class="col-md-12">
+      <h3>List of reported images</h3>
+    </div>
+    <div class="col-md-3" *ngFor="let images of imagesModel">
+      <nb-card accent="danger">
+        <nb-card-header class="text-center">
+            <button type="button" class="btn btn-outline-danger mr-2" (click)="delete(images)" >Delete</button>
+            <button type="button" class="btn btn-outline-success" (click)="confirm(images)">Add to voting list</button>
+        </nb-card-header>
+        <nb-card-body class="text-center">
+          <img src="{{ images.childData.image_url }}" class="w-50 ml-auto mr-auto" alt="image">
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </ng-container>
+  <ng-template #imagesModel_else>
+      <div class="col-md-6 offset-md-3">
+          <nb-alert status="danger" class="text-center">
+              No image reported yet!
+          </nb-alert>
+      </div>
+  </ng-template>
+</div>
